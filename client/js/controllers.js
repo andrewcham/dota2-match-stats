@@ -15,9 +15,9 @@ matchApp.controller('MatchCtrl', function($scope, matchesFactory) {
       ).then(function(data) {
         console.log(data.data);
         $scope.match = data.data;
+        // Blank the input
+        $scope.matchInput = '';
       });
-      // Blank the input
-      $scope.matchInput = '';
     }
   };
 });

@@ -23,6 +23,13 @@ var getMatch = function (id, cb) {
 	});
 };
 
+/**
+  * Calls DOTA 2 API to get player summaries
+  *
+  * Params:
+  *   ids - String of comma-separated 64-bit account_ids to be searched
+  *	  cb - callback data from the query, in JSON form
+  */
 var getPlayerSummaries = function(ids, cb) {
 	request({
 		url: playerURL,

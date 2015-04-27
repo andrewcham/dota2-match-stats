@@ -1,3 +1,4 @@
 node_modules/
 client/lib/
+server/api/key.js
 npm-debug.log

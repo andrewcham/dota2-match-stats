@@ -8,15 +8,17 @@
                 {{match.error}}
             </div>
             <div ng-show="match.players">
-                <table>
+                <table class="center">
                     <tr class="heading">
                         <td>Match ID</td>
+                        <td>Game Mode</td>
                         <td>Match Start</td>
                         <td>Duration</td>
                         <td>Winning Team</td>
                     </tr>
                     <tr>
                         <td>{{match.match_id}}</td>
+                        <td>{{match.game_mode}}</td>
                         <td>{{match.start_time}}</td>
                         <td>{{match.duration}}</td>
                         <td>{{match.radiant_win ? 'Radiant' : 'Dire'}}</td>
@@ -25,7 +27,7 @@
                 <div class="radiant">
                 RADIANT
                 </div>
-                <table>
+                <table class="center">
                     <tr class="heading">
                         <td>Name</td>
                         <td>Hero</td>
@@ -74,7 +76,7 @@
                 <div class="dire">
                 DIRE
                 </div>
-                <table>
+                <table class="center">
                     <tr class="heading">
                         <td>Name</td>
                         <td>Hero</td>

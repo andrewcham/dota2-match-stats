@@ -6,7 +6,7 @@ var api = require('../api/api');
 
 var bit64converstion = 76561197960265728;
 var private32bit = 4294967295;
-var item_keys = ['item_0', 'item_1', 'item_2', 'item_3', 'item_4', 'item_5']
+var item_keys = ['item_0', 'item_1', 'item_2', 'item_3', 'item_4', 'item_5'];
 
 /**
   * Transforms the raw Match JSON data to be more presentable to the client.
@@ -27,7 +27,7 @@ var transformMatchJSON = function (matchJson, cb) {
   var num_public_accounts = 0;
 
   for (player = 0; player < players.length; player++) {
-    var id = players[player].account_id;
+    var id = !players[player].account_id ? private32bit : players[player].account_id;
     // If the player has set their profile to be private, don't search
     if (id !== private32bit) {
       account_ids += bignum(id).add(bit64converstion).toString() + ',';
@@ -50,6 +50,9 @@ var transformMatchJSON = function (matchJson, cb) {
       if (newJson.players[player].account_id === private32bit) {
         newJson.players[player].account_id = 'Anonymous';
       }
+      else if (!newJson.players[player].account_id) {
+        newJson.players[player].account_id = 'Bot';
+      }
       else {
         var a_id = newJson.players[player].account_id;
         newJson.players[player].account_id = persona_names[a_id];
@@ -67,7 +70,7 @@ var transformMatchJSON = function (matchJson, cb) {
     }
 
     // Separate the players into Radiant and Dire (they keep order in the JSON)
-    var teams = {}
+    var teams = {};
     teams.radiant = newJson.players.slice(0, 5);
     teams.dire = newJson.players.slice(5, 10);
     newJson.players = teams;
