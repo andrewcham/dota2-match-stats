@@ -20,7 +20,7 @@ router.get('/api/matches/:m_id', function(req, res) {
       if (match.length === 0) { // If match doesn't exist in DB, call API
         api.getMatch(req.params.m_id, function(match_data) {
           if (match_data.error) { // Add the Match ID to API error so we don't need to check them again
-            match_data.match_id = req.params.m_id;
+            match_data.match_id = Number(req.params.m_id);
           }
 
           // Perform an insert with the match data retrived from API
@@ -41,7 +41,7 @@ router.get('/api/matches/:m_id', function(req, res) {
       }
       // If match is found in the DB, just return it 
       else { 
-        if (match_data.error) { // If the match ID has an error associated with it, don't bother transforming
+        if (match[0].error) { // If the match ID has an error associated with it, don't bother transforming
           res.json(match[0]);
         }
         else {
