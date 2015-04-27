@@ -33,7 +33,7 @@ var getPlayerSummaries = function(ids, cb) {
 		if (res.statusCode != 200) { throw new Error('Not valid IDs'); }
 		cb(JSON.parse(body).response.players);
 	});
-}
+};
 
 module.exports.getMatch = getMatch;
 module.exports.getPlayerSummaries = getPlayerSummaries;

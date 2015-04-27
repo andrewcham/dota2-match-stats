@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
 var api = require('../api/api');
+var transform = require('../api/transformation');
 var db = require('../models/Match');
 
 /* GET home page. */
@@ -18,34 +19,39 @@ router.get('/api/matches/:m_id', function(req, res) {
     else {
       if (match.length === 0) { // If match doesn't exist in DB, call API
         api.getMatch(req.params.m_id, function(match_data) {
+          if (match_data.error) { // Add the Match ID to API error so we don't need to check them again
+            match_data.match_id = req.params.m_id;
+          }
+
           // Perform an insert with the match data retrived from API
           db.matches.insert(match_data, function(err, new_match) {
             if (err) { res.status(500).send(err); }
-            else { res.json(new_match); }
+            else {
+              if (match_data.error) { // If the match search errored out, don't bother transforming
+                res.json(new_match);
+              }
+              else {
+                transform(new_match, function(new_json) {
+                  res.json(new_json);
+                }); 
+              }
+            }
           });
         });
       }
       // If match is found in the DB, just return it 
-      else { res.json(match); }
+      else { 
+        if (match_data.error) { // If the match ID has an error associated with it, don't bother transforming
+          res.json(match[0]);
+        }
+        else {
+          transform(match[0], function(new_json) {
+            res.json(new_json);
+          }); 
+        }
+      }
     }
   });
 });
 
 module.exports = router;
-
-/**
-  * Transforms the raw Match JSON data to be more presentable to the client.
-  * NOTE: We can't actually store player information because persona name is
-  *       not a static variable in the DOTA 2 world: the player can always 
-  *       change their name!
-  *
-  * Params:
-  *   matchJSON - Raw match JSON data to be cleaned
-  *   cb - callback modified JSON
-  */
-function transformMatchJSON (matchJSON, cb) {
-  var newJSON = matchJSON;
-
-
-  return newJSON;
-}

@@ -1,0 +1,35 @@
+* {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    font-family: calibri;
+}
+table, th, td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.radiant {
+	background-color: green;
+	color: white;
+	font-size: 2em;
+}
+.dire {
+	background-color: red;
+	color: white;
+	font-size: 2em;
+}
+.heading {
+	font-weight: bold;
+}
+.error {
+	color: red;
+	font-weight: bold;
+	font-size: 3em;
+}

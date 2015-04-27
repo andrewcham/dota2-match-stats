@@ -1,5 +1,3 @@
-'use strict';
-
 var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   watch = require('gulp-watch'),

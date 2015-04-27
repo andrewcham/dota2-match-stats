@@ -1,8 +1,126 @@
 <div class="container" ng-controller="MatchCtrl">
     <div class="row col-md-12">
         <div>
-            <input type="text" class="form-control input-lg" placeholder="Match ID" ng-keypress="getMatch($event)" ng-model="matchInput">
-            {{match}}
+            <form ng-submit="getMatch($event)">
+                <input type="number" class="form-control input-lg" placeholder="Match ID" ng-model="matchInput">
+            </form>
+            <div ng-show="match.error" class="error">
+                {{match.error}}
+            </div>
+            <div ng-show="match.players">
+                <table>
+                    <tr class="heading">
+                        <td>Match ID</td>
+                        <td>Match Start</td>
+                        <td>Duration</td>
+                        <td>Winning Team</td>
+                    </tr>
+                    <tr>
+                        <td>{{match.match_id}}</td>
+                        <td>{{match.start_time}}</td>
+                        <td>{{match.duration}}</td>
+                        <td>{{match.radiant_win ? 'Radiant' : 'Dire'}}</td>
+                    </tr>
+                </table>
+                <div class="radiant">
+                RADIANT
+                </div>
+                <table>
+                    <tr class="heading">
+                        <td>Name</td>
+                        <td>Hero</td>
+                        <td>Level</td>
+                        <td>K</td>
+                        <td>D</td>
+                        <td>A</td>
+                        <td>Gold</td>
+                        <td>LH</td>
+                        <td>D</td>
+                        <td>XPM</td>
+                        <td>GPM</td>
+                        <td>HD</td>
+                        <td>HH</td>
+                        <td>TD</td>
+                        <td>Item 1</td>
+                        <td>Item 2</td>
+                        <td>Item 3</td>
+                        <td>Item 4</td>
+                        <td>Item 5</td>
+                        <td>Item 6</td>
+                    </tr>
+                    <tr ng-repeat="player in match.players.radiant">
+                        <td>{{player.account_id}}</td>
+                        <td>{{player.hero_id}}</td>
+                        <td>{{player.level}}</td>
+                        <td>{{player.kills}}</td>
+                        <td>{{player.deaths}}</td>
+                        <td>{{player.assists}}</td>
+                        <td>{{player.gold + player.gold_spent}}</td>
+                        <td>{{player.last_hits}}</td>
+                        <td>{{player.denies}}</td>
+                        <td>{{player.xp_per_min}}</td>
+                        <td>{{player.gold_per_min}}</td>
+                        <td>{{player.hero_damage}}</td>
+                        <td>{{player.hero_healing}}</td>
+                        <td>{{player.tower_damage}}</td>
+                        <td>{{player.item_0 !== 'empty' ? player.item_0 : ''}}</td>
+                        <td>{{player.item_1 !== 'empty' ? player.item_1 : ''}}</td>
+                        <td>{{player.item_2 !== 'empty' ? player.item_2 : ''}}</td>
+                        <td>{{player.item_3 !== 'empty' ? player.item_3 : ''}}</td>
+                        <td>{{player.item_4 !== 'empty' ? player.item_4 : ''}}</td>
+                        <td>{{player.item_5 !== 'empty' ? player.item_5 : ''}}</td>
+                    </tr>
+                </table>
+                <div class="dire">
+                DIRE
+                </div>
+                <table>
+                    <tr class="heading">
+                        <td>Name</td>
+                        <td>Hero</td>
+                        <td>Level</td>
+                        <td>K</td>
+                        <td>D</td>
+                        <td>A</td>
+                        <td>Gold</td>
+                        <td>LH</td>
+                        <td>D</td>
+                        <td>XPM</td>
+                        <td>GPM</td>
+                        <td>HD</td>
+                        <td>HH</td>
+                        <td>TD</td>
+                        <td>Item 1</td>
+                        <td>Item 2</td>
+                        <td>Item 3</td>
+                        <td>Item 4</td>
+                        <td>Item 5</td>
+                        <td>Item 6</td>
+                    </tr>
+                    <tr ng-repeat="player in match.players.dire">
+                        <td>{{player.account_id}}</td>
+                        <td>{{player.hero_id}}</td>
+                        <td>{{player.level}}</td>
+                        <td>{{player.kills}}</td>
+                        <td>{{player.deaths}}</td>
+                        <td>{{player.assists}}</td>
+                        <td>{{player.gold + player.gold_spent}}</td>
+                        <td>{{player.last_hits}}</td>
+                        <td>{{player.denies}}</td>
+                        <td>{{player.xp_per_min}}</td>
+                        <td>{{player.gold_per_min}}</td>
+                        <td>{{player.hero_damage}}</td>
+                        <td>{{player.hero_healing}}</td>
+                        <td>{{player.tower_damage}}</td>
+                        <td>{{player.item_0 !== 'empty' ? player.item_0 : ''}}</td>
+                        <td>{{player.item_1 !== 'empty' ? player.item_1 : ''}}</td>
+                        <td>{{player.item_2 !== 'empty' ? player.item_2 : ''}}</td>
+                        <td>{{player.item_3 !== 'empty' ? player.item_3 : ''}}</td>
+                        <td>{{player.item_4 !== 'empty' ? player.item_4 : ''}}</td>
+                        <td>{{player.item_5 !== 'empty' ? player.item_5 : ''}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>  
 </div>

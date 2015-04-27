@@ -13,9 +13,8 @@ matchApp.controller('MatchCtrl', function($scope, matchesFactory) {
       matchesFactory.getMatch(
         $scope.matchInput
       ).then(function(data) {
-        /* Route returns list of matches, but since we're only looking at
-           one match at a time, just put the first element in the scope */
-        $scope.match = data.data[0];
+        console.log(data.data);
+        $scope.match = data.data;
       });
       // Blank the input
       $scope.matchInput = '';
