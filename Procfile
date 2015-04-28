@@ -1,1 +1,1 @@
-web: node server/views/app.js
+web: node server/app.js
