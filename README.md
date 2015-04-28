@@ -29,3 +29,4 @@ var key = <Steam API Key Here>;
 
 module.exports = key;
 ````
+An API key can be found here: http://steamcommunity.com/dev/apikey
